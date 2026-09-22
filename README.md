@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Database Designer
 
-## Getting Started
+> A visual workspace for designing PostgreSQL database schemas before writing the implementation.
 
-First, run the development server:
+Database Designer is a portfolio project focused on the practical engineering behind a modern developer tool: a clear interface, a typed domain model, visual schema editing, and a reliable path from an idea to executable SQL.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The product is intentionally being built in milestones. Each milestone delivers a useful, testable capability without prematurely introducing persistence, authentication, or collaboration complexity.
+
+## Why this project?
+
+Designing a relational schema often begins with scattered notes, diagrams, and SQL drafts. This application brings that early design work into one focused workspace where developers can create tables, inspect relationships, and eventually generate a PostgreSQL-ready starting point.
+
+This project demonstrates:
+
+- Product-minded frontend implementation for a developer audience
+- Type-safe domain modelling with TypeScript
+- Component design and state management in React
+- Interactive graph/canvas work using React Flow
+- A scalable foundation for future PostgreSQL and Prisma integration
+- Testing strategy across units, interactions, and end-to-end workflows
+
+## Current status
+
+**Milestone 1 — Frontend foundation and visual canvas** is in progress.
+
+- [x] Next.js and TypeScript project setup
+- [x] Dark developer-tool application shell
+- [x] React Flow visual canvas
+- [x] Typed table and column models
+- [x] Draggable table nodes
+- [x] Create an in-memory table from the UI
+- [ ] Add focused unit and end-to-end tests
+- [ ] Refine responsive behaviour and accessibility
+
+> The schema is currently in memory only. Reloading the page resets it by design.
+
+## Product roadmap
+
+### Milestone 1 — Visual schema designer
+
+- [x] Application header, table sidebar, and canvas layout
+- [x] Create and drag table nodes
+- [x] Display columns, data types, and key indicators
+- [ ] Rename tables and columns
+- [ ] Add, edit, and remove columns
+- [ ] Define relationships between tables
+- [ ] Validate the core interaction with Vitest and Playwright
+
+### Milestone 2 — SQL generation
+
+- [ ] Represent relationships and constraints in the domain model
+- [ ] Generate readable PostgreSQL `CREATE TABLE` statements
+- [ ] Add a SQL preview and copy action
+- [ ] Test SQL generation from representative schemas
+
+### Milestone 3 — Persistence
+
+- [ ] Introduce PostgreSQL and Prisma
+- [ ] Persist schemas and their table layouts
+- [ ] Add migrations and seed data
+- [ ] Design error handling for failed saves and invalid schemas
+
+### Milestone 4 — Accounts and projects
+
+- [ ] Add authentication and user-owned projects
+- [ ] Create, rename, duplicate, and archive projects
+- [ ] Authorize access to stored schemas
+
+### Future exploration
+
+- [ ] Import an existing PostgreSQL schema
+- [ ] Export SQL files and diagrams
+- [ ] Schema version history
+- [ ] Collaborative editing
+
+## Technology
+
+| Area | Choice | Purpose |
+| --- | --- | --- |
+| Framework | Next.js, React, TypeScript | Full-stack-ready web foundation and type safety |
+| Styling | Tailwind CSS | Fast, consistent, maintainable UI composition |
+| Canvas | React Flow | Interactive, draggable schema visualisation |
+| Database | PostgreSQL + Prisma *(planned)* | Durable schema/project persistence |
+| Quality | Vitest + Playwright *(planned)* | Unit, component, and end-to-end confidence |
+
+## Architecture direction
+
+The application will keep the database-design domain separate from UI components and infrastructure. This makes the canvas easier to evolve without tightly coupling it to persistence or SQL generation.
+
+```text
+app/                 Next.js routes and application composition
+components/          Reusable UI and canvas components
+types/               Core domain types: tables, columns, relationships
+lib/                 Future pure domain logic, validation, and SQL generation
+prisma/              Future Prisma schema and migrations
+tests/               Future unit, integration, and end-to-end tests
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Core domain model
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The initial model is deliberately small:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```ts
+type DatabaseTable = {
+  id: string;
+  name: string;
+  columns: DatabaseColumn[];
+};
 
-## Learn More
+type DatabaseColumn = {
+  id: string;
+  name: string;
+  type: string;
+  isPrimaryKey: boolean;
+  isForeignKey: boolean;
+};
+```
 
-To learn more about Next.js, take a look at the following resources:
+Relationships, validation rules, and persistence will be added only when the visual editing experience is solid.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Prerequisites
 
-## Deploy on Vercel
+- Node.js 20 or later
+- npm
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Commands
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Useful quality checks:
+
+```bash
+npm run lint
+npm run build
+```
+
+## Engineering principles
+
+- Build vertically: finish a small user-facing capability before expanding scope.
+- Prefer explicit TypeScript types at domain boundaries.
+- Keep UI components focused and reusable.
+- Keep business rules independent from React where possible.
+- Add tests around behaviour and failure cases, not implementation details.
+- Avoid premature infrastructure: no database, authentication, or persistence until the product needs it.
+
+## Progress log
+
+Use this section as a lightweight development journal. It provides useful context for future contributors and makes decisions visible to recruiters.
+
+| Date | Milestone | Decision / outcome |
+| --- | --- | --- |
+| 2026-09-22 | 1 | Started the frontend foundation and React Flow canvas. |
+
+## License
+
+This project is for portfolio and learning purposes.
