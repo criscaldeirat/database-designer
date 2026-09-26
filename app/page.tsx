@@ -16,17 +16,31 @@ export default function Home() {
           >
             New Table
           </button>
-          <button className="bg-(--primary) rounded-md px-4 py-2 text-sm font-medium hover:bg-(--primary-hover)">Generate SQL</button>
+          <button 
+            className="bg-(--primary) rounded-md px-4 py-2 text-sm font-medium hover:bg-(--primary-hover)"
+          >
+            Generate SQL
+          </button>
         </div>
       </header>
 
-      <div className="flex">
-        <aside>
-
+      <div className="flex min-h-[calc(100vh-4rem)]">
+        <aside className="w-64 shrink-0 border-r border-(--border) bg-(--surface) p-4">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-(--text-secondary)">
+            Tables
+          </h2>
+          <div className="mt-6 rounded-lg border border-dashed border-(--border) p-4 text-center">
+            <p className="text-sm font-medium">
+              No tables yet
+            </p>
+            <p className="mt-2 text-sm text-(--text-secondary)">
+              Create a table to start designing your schema.
+            </p>
+          </div>
         </aside>
 
-        <section>
-
+        <section className="flex-1 p-6">
+          <p className="text-(--text-secondary)">Schema canvas</p>
         </section>
       </div>
     </main>
