@@ -24,11 +24,11 @@ This project demonstrates:
 **Milestone 1 — Frontend foundation and visual canvas** is in progress.
 
 - [x] Next.js and TypeScript project setup
-- [x] Dark developer-tool application shell
-- [x] React Flow visual canvas
-- [x] Typed table and column models
-- [x] Draggable table nodes
-- [x] Create an in-memory table from the UI
+- [] Dark developer-tool application shell
+- [] React Flow visual canvas
+- [] Typed table and column models
+- [] Draggable table nodes
+- [] Create an in-memory table from the UI
 - [ ] Add focused unit and end-to-end tests
 - [ ] Refine responsive behaviour and accessibility
 
@@ -38,9 +38,9 @@ This project demonstrates:
 
 ### Milestone 1 — Visual schema designer
 
-- [x] Application header, table sidebar, and canvas layout
-- [x] Create and drag table nodes
-- [x] Display columns, data types, and key indicators
+- [] Application header, table sidebar, and canvas layout
+- [] Create and drag table nodes
+- [] Display columns, data types, and key indicators
 - [ ] Rename tables and columns
 - [ ] Add, edit, and remove columns
 - [ ] Define relationships between tables
